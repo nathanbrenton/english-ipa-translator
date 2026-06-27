@@ -98,3 +98,18 @@ Expected response:
 This MVP does not use machine-learning models, LLMs, embeddings, or transformer generation.
 
 It uses deterministic dictionary lookup and rule-based ARPABET-to-IPA conversion.
+
+## Standard Public Install
+
+For a normal online setup, use the repo-local requirements file:
+
+    cd ~/Desktop/english-ipa-translator/backend
+    python3 -m venv .venv
+    source .venv/bin/activate
+    python -m pip install -r requirements.txt
+
+Then validate:
+
+    pytest -v
+
+The wheelhouse install path is still useful for offline rebuilds, but most GitHub users should start with `backend/requirements.txt`.

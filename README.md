@@ -213,3 +213,34 @@ Possible future milestones:
 - saved lyric projects
 - optional machine-learning fallback for unknown words
 - transformer-assisted lyric suggestions in a separate later project
+
+## Public Quick Start
+
+This project does not require Debian specifically. It should run on Linux, macOS, or Windows with a compatible Python and Node.js environment.
+
+Recommended prerequisites:
+
+- Python 3.11+
+- Node.js 20+
+- npm
+- Git
+
+Terminal 1: run the backend
+
+    cd backend
+    python3 -m venv .venv
+    source .venv/bin/activate
+    python -m pip install -r requirements.txt
+    uvicorn app.main:app --host 127.0.0.1 --port 8000
+
+Terminal 2: run the frontend
+
+    cd frontend
+    npm ci
+    npm run dev
+
+Open the app:
+
+    http://localhost:5173/
+
+For the author's offline Debian workflow, see the wheelhouse and node-cache notes below.
