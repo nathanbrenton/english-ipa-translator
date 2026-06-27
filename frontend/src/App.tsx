@@ -1,21 +1,50 @@
 import { useState } from 'react'
+import { translateText } from './api/translateClient'
 import './App.css'
-import TranslationPreview from './components/TranslationPreview'
+import TranslationResults from './components/TranslationResults'
 import TranslatorForm from './components/TranslatorForm'
+import type { TranslateResponse } from './types/translate'
 
 const EXAMPLE_TEXT = 'we dream beneath the satellites'
 
 function App() {
   const [inputText, setInputText] = useState('')
-  const [submittedText, setSubmittedText] = useState('')
+  const [translationResult, setTranslationResult] =
+    useState<TranslateResponse | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
-  function handleSubmit() {
-    setSubmittedText(inputText.trim())
+  async function handleSubmit() {
+    const trimmedText = inputText.trim()
+
+    if (!trimmedText) {
+      setTranslationResult(null)
+      setErrorMessage('Please enter text before translating.')
+      return
+    }
+
+    setIsLoading(true)
+    setErrorMessage('')
+
+    try {
+      const result = await translateText(trimmedText)
+      setTranslationResult(result)
+    } catch (error) {
+      setTranslationResult(null)
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : 'Something went wrong while translating.',
+      )
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   function handleUseExample() {
     setInputText(EXAMPLE_TEXT)
-    setSubmittedText('')
+    setTranslationResult(null)
+    setErrorMessage('')
   }
 
   return (
@@ -38,7 +67,11 @@ function App() {
         onUseExample={handleUseExample}
       />
 
-      <TranslationPreview submittedText={submittedText} />
+      <TranslationResults
+        result={translationResult}
+        isLoading={isLoading}
+        errorMessage={errorMessage}
+      />
     </main>
   )
 }
