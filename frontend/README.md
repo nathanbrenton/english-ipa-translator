@@ -2,7 +2,7 @@
 
 React frontend for the English IPA Translator project.
 
-The frontend provides a simple browser interface for entering English words, phrases, or lyric lines and viewing IPA-style pronunciation output from the FastAPI backend.
+The frontend provides a simple browser interface for entering English words or phrases and viewing IPA-style pronunciation output from the FastAPI backend.
 
 ## Current Frontend Scope
 

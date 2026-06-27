@@ -2,7 +2,7 @@
 
 FastAPI backend for the English IPA Translator project.
 
-The backend accepts English words, phrases, or lyric lines and returns structured IPA-like pronunciation output using deterministic CMUdict-style lookup and ARPABET-to-IPA conversion.
+The backend accepts English words or phrases and returns structured IPA-like pronunciation output using deterministic CMUdict-style lookup and ARPABET-to-IPA conversion.
 
 ## Current Backend Scope
 

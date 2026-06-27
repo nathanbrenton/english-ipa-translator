@@ -30,7 +30,7 @@ function TranslatorForm({
       <div className="card-header">
         <div>
           <h2 id="translator-heading">Translator</h2>
-          <p>Enter a word, phrase, or lyric line.</p>
+          <p>Enter a word or phrase.</p>
         </div>
       </div>
 

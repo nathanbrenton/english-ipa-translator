@@ -79,7 +79,7 @@ function App() {
     <main className="app-shell">
       <section className="hero-panel">
         <p className="eyebrow">English IPA Translator</p>
-        <h1>Translate English lyric lines into IPA-style pronunciation output.</h1>
+        <h1>Translate English text into IPA-style pronunciation output.</h1>
         <p className="hero-copy">
           This MVP uses a deterministic FastAPI backend with CMUdict-style
           pronunciation lookup and ARPABET-to-IPA conversion. The React frontend
