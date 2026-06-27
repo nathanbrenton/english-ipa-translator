@@ -1,75 +1,101 @@
-# React + TypeScript + Vite
+# English IPA Translator Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React frontend for the English IPA Translator project.
 
-Currently, two official plugins are available:
+The frontend provides a simple browser interface for entering English words, phrases, or lyric lines and viewing IPA-style pronunciation output from the FastAPI backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Current Frontend Scope
 
-## React Compiler
+- Vite React TypeScript app
+- Plain CSS styling
+- Controlled textarea input
+- Submit button
+- Example text button
+- Loading state
+- Error state
+- API client using fetch
+- Full-line IPA display
+- Word-by-word pronunciation table
+- Unknown-word display
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Project Location
 
-## Expanding the ESLint configuration
+`~/Desktop/english-ipa-translator/frontend`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Local Development
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+From the frontend directory:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+    cd ~/Desktop/english-ipa-translator/frontend
+    npm run dev
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The Vite development server normally starts at:
 
-```
+    http://localhost:5173/
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Build
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+    cd ~/Desktop/english-ipa-translator/frontend
+    npm run build
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Lint
 
-```
+    cd ~/Desktop/english-ipa-translator/frontend
+    npm run lint
+
+## Preview Production Build
+
+    cd ~/Desktop/english-ipa-translator/frontend
+    npm run preview
+
+## Backend Dependency
+
+The frontend expects the FastAPI backend to be running at:
+
+    http://127.0.0.1:8000
+
+The frontend sends translation requests to:
+
+    POST http://127.0.0.1:8000/api/translate
+
+## Node/npm Cache Notes
+
+The project commits:
+
+- `package.json`
+- `package-lock.json`
+
+The project does not commit:
+
+- `node_modules/`
+- `dist/`
+
+The npm cache can be preserved outside the repo at:
+
+    ~/Downloads/node-cache/npm
+
+A repeatable reinstall can be attempted with:
+
+    cd ~/Desktop/english-ipa-translator/frontend
+    npm ci --cache "$HOME/Downloads/node-cache/npm" --prefer-offline
+
+A stricter offline attempt can be tried with:
+
+    cd ~/Desktop/english-ipa-translator/frontend
+    npm ci --cache "$HOME/Downloads/node-cache/npm" --offline
+
+## Notes
+
+This frontend intentionally avoids UI frameworks and external state-management libraries.
+
+The goal is to practice core React concepts:
+
+- components
+- props
+- state
+- controlled forms
+- event handlers
+- conditional rendering
+- API calls
+- TypeScript types
+- plain CSS
