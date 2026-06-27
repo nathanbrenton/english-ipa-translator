@@ -1,8 +1,23 @@
 # English IPA Translator
 
-A small full-stack web application that converts English words, phrases, and lyric lines into IPA-style pronunciation output.
+A small full-stack web application that converts English words and phrases into IPA-style pronunciation output.
 
-This project is the first milestone of a larger future lyric-analysis and lyric-generation portfolio project. The current version focuses on deterministic pronunciation lookup and a clean React + FastAPI application structure.
+This project is the first milestone of a larger future pronunciation, rhyme, and text-analysis portfolio project. The current version focuses on deterministic pronunciation lookup and a clean React + FastAPI application structure.
+
+## Screenshots
+
+### Application Header
+
+![English IPA Translator application header](docs/screenshots/01_GUI-Header.png)
+
+### Translation Results
+
+![English IPA Translator showing IPA translation results](docs/screenshots/02_Results.png)
+
+### Unknown Word Handling
+
+![English IPA Translator showing unknown-word handling](docs/screenshots/03_Results_Unknown-Word.png)
+
 
 ## MVP Goal
 
