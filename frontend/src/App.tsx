@@ -5,7 +5,11 @@ import TranslationResults from './components/TranslationResults'
 import TranslatorForm from './components/TranslatorForm'
 import type { TranslateResponse } from './types/translate'
 
-const EXAMPLE_TEXT = 'we dream beneath the satellites'
+const EXAMPLE_TEXTS = [
+  'we dream beneath the satellites',
+  'hello zzzznotaword world',
+  'sing softly under silver rain',
+]
 
 function App() {
   const [inputText, setInputText] = useState('')
@@ -13,6 +17,7 @@ function App() {
     useState<TranslateResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const [copyMessage, setCopyMessage] = useState('')
 
   async function handleSubmit() {
     const trimmedText = inputText.trim()
@@ -20,11 +25,13 @@ function App() {
     if (!trimmedText) {
       setTranslationResult(null)
       setErrorMessage('Please enter text before translating.')
+      setCopyMessage('')
       return
     }
 
     setIsLoading(true)
     setErrorMessage('')
+    setCopyMessage('')
 
     try {
       const result = await translateText(trimmedText)
@@ -41,10 +48,31 @@ function App() {
     }
   }
 
-  function handleUseExample() {
-    setInputText(EXAMPLE_TEXT)
+  function handleUseExample(exampleText: string) {
+    setInputText(exampleText)
     setTranslationResult(null)
     setErrorMessage('')
+    setCopyMessage('')
+  }
+
+  function handleClear() {
+    setInputText('')
+    setTranslationResult(null)
+    setErrorMessage('')
+    setCopyMessage('')
+  }
+
+  async function handleCopyIpaLine() {
+    if (!translationResult?.ipa_line) {
+      return
+    }
+
+    try {
+      await navigator.clipboard.writeText(translationResult.ipa_line)
+      setCopyMessage('IPA line copied to clipboard.')
+    } catch {
+      setCopyMessage('Could not copy IPA line to clipboard.')
+    }
   }
 
   return (
@@ -62,15 +90,20 @@ function App() {
 
       <TranslatorForm
         inputText={inputText}
+        isLoading={isLoading}
+        exampleTexts={EXAMPLE_TEXTS}
         onInputTextChange={setInputText}
         onSubmit={handleSubmit}
         onUseExample={handleUseExample}
+        onClear={handleClear}
       />
 
       <TranslationResults
         result={translationResult}
         isLoading={isLoading}
         errorMessage={errorMessage}
+        copyMessage={copyMessage}
+        onCopyIpaLine={handleCopyIpaLine}
       />
     </main>
   )

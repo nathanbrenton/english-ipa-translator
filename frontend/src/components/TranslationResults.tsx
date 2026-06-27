@@ -4,13 +4,19 @@ type TranslationResultsProps = {
   result: TranslateResponse | null
   isLoading: boolean
   errorMessage: string
+  copyMessage: string
+  onCopyIpaLine: () => void
 }
 
 function TranslationResults({
   result,
   isLoading,
   errorMessage,
+  copyMessage,
+  onCopyIpaLine,
 }: TranslationResultsProps) {
+  const hasIpaLine = Boolean(result?.ipa_line)
+
   return (
     <section className="result-panel" aria-labelledby="result-heading">
       <h3 id="result-heading">Translation result</h3>
@@ -29,10 +35,25 @@ function TranslationResults({
       {result && (
         <div className="translation-output">
           <div className="ipa-line-card">
-            <p className="result-label">Full-line IPA</p>
-            <p className="ipa-line">
-              {result.ipa_line || 'No IPA output available.'}
-            </p>
+            <div className="result-card-header">
+              <div>
+                <p className="result-label">Full-line IPA</p>
+                <p className="ipa-line">
+                  {result.ipa_line || 'No IPA output available.'}
+                </p>
+              </div>
+
+              <button
+                type="button"
+                className="secondary-button"
+                onClick={onCopyIpaLine}
+                disabled={!hasIpaLine}
+              >
+                Copy IPA
+              </button>
+            </div>
+
+            {copyMessage && <p className="copy-message">{copyMessage}</p>}
           </div>
 
           <div className="table-wrapper">
@@ -48,7 +69,10 @@ function TranslationResults({
               </thead>
               <tbody>
                 {result.tokens.map((token, index) => (
-                  <tr key={`${token.text}-${index}`}>
+                  <tr
+                    key={`${token.text}-${index}`}
+                    className={token.found ? undefined : 'unknown-row'}
+                  >
                     <td>{token.text}</td>
                     <td>{token.normalized}</td>
                     <td>
@@ -67,6 +91,10 @@ function TranslationResults({
               </tbody>
             </table>
           </div>
+
+          <p className="muted">
+            Unknown words are intentionally marked instead of guessed.
+          </p>
         </div>
       )}
     </section>

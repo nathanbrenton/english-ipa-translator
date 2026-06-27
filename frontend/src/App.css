@@ -237,3 +237,57 @@ th {
   color: #991b1b;
   background: #fee2e2;
 }
+
+.example-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.example-button {
+  padding: 8px 12px;
+  border: 1px solid #ddd6fe;
+  border-radius: 999px;
+  color: #5f3dc4;
+  background: #faf5ff;
+  font: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.example-button:hover {
+  background: #f3e8ff;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.result-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.copy-message {
+  margin: 12px 0 0;
+  color: #166534;
+  font-size: 0.92rem;
+}
+
+.unknown-row {
+  background: #fffbeb;
+}
+
+.unknown-row td {
+  border-bottom-color: #fde68a;
+}
